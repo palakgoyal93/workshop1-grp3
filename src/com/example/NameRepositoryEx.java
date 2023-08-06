@@ -4,23 +4,28 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class NameRepositoryEx {
-    static String[] names ={"Palak Goyal","Deepa Singh","Seema Sharma"};
+    static String[] names = {"Palak Goyal", "Deepa Singh", "Seema Sharma"};
 
     public static void main(String[] args) {
 
 
         String foundName = find("Deepa Singh");
-        if (foundName != null){
+        if (foundName != null) {
             System.out.println("Found name is: " + foundName);
 
-        }else {
+        } else {
             System.out.println("Name not found");
         }
 
         Boolean addedName = add("Deepa Singh");
         System.out.println("Added Name: " + addedName);
 
-       // System.out.println(Arrays.stream(names).count());
+
+        String[] foundFirstName = findByFirstName("Palak");
+        System.out.println("First name is: " + foundFirstName[0]);
+        
+        String[] foundLastName = findByLastName("Goyal");
+        System.out.println("Last name is: " + foundLastName[1]);
     }
 
     public static boolean add(final String fullName) {
@@ -35,7 +40,7 @@ public class NameRepositoryEx {
             addNames[addNames.length - 1] = fullName;
             names = addNames;
             return true;
-        }else {
+        } else {
             return false;
         }
 
@@ -50,12 +55,28 @@ public class NameRepositoryEx {
         return null;
     }
 
-   /* public static String[] findByFirstName(final String firstName){
-       // String[] findFirstName = NameRepository.findByfirstName();
+    public static String[] findByFirstName(final String firstName) {
+        String[] storeValue = new String[names.length];
+        for (String str : names) {
+            String[] splitName = str.split(" ");
+            if (splitName[0].equals(firstName)) {
+                storeValue[0] = firstName;
+                return storeValue;
+            }
+        }
+        return null;
+    }
+        public static String[] findByLastName(final String lastName){
+            String[] lastNameStore = new String[names.length];
+            for (String str : names) {
+                String[] splitName = str.split(" ");
+                if (splitName[1].equals(lastName)) {
+                    lastNameStore[1] = lastName;
+                    return lastNameStore;
+                }
 
+            }
 
-     //   return findFirstName;
-    }*/
-
-}
-
+            return null;
+        }
+    }
